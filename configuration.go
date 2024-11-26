@@ -17,7 +17,6 @@ func (b *BirdClient) Configure(args ...string) (resp, replyCode []byte, err erro
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{CONFIGURE}, args...), " "))
 	if err != nil {

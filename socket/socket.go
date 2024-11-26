@@ -39,6 +39,9 @@ func NewBirdSocket(path string, bufferSize int) *BirdSocket {
 
 // Connect opens the unix socket connection
 func (s *BirdSocket) Connect() (err error) {
+	if s.conn != nil {
+		return
+	}
 	s.conn, err = net.Dial("unix", s.path)
 	if err != nil {
 		return
@@ -60,6 +63,7 @@ func (s *BirdSocket) Close() {
 	if s.conn != nil {
 		s.conn.Close()
 	}
+	s.conn = nil
 }
 
 func (s *BirdSocket) Send(data string) (resp []byte, replyCode []byte, err error) {

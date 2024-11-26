@@ -17,7 +17,6 @@ func (b *BirdClient) DisableProtocol(args ...string) (resp, replyCode []byte, er
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{DISABLE_PROTOCOL}, args...), " "))
 	if err != nil {
@@ -43,7 +42,6 @@ func (b *BirdClient) EnableProtocol(args ...string) (resp, replyCode []byte, err
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{ENABLE_PROTOCOL}, args...), " "))
 	if err != nil {
@@ -69,7 +67,6 @@ func (b *BirdClient) RestartProtocol(args ...string) (resp, replyCode []byte, er
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{RESTART_PROTOCOL}, args...), " "))
 	if err != nil {
@@ -95,7 +92,6 @@ func (b *BirdClient) ReloadProtocol(args ...string) (resp, replyCode []byte, err
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{RELOAD_PROTOCOL}, args...), " "))
 	if err != nil {
@@ -117,7 +113,6 @@ func (b *BirdClient) Shutdown() (resp, replyCode []byte, err error) {
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(DOWN)
 	if err != nil {
@@ -139,7 +134,6 @@ func (b *BirdClient) GracefulRestart() (resp, replyCode []byte, err error) {
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(GRACEFUL_RESTART)
 	if err != nil {

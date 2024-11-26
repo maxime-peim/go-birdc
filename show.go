@@ -11,7 +11,6 @@ func (b *BirdClient) ShowStatus() (resp, replyCode []byte, err error) {
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(SHOW_STATUS)
 	if err != nil {
@@ -27,11 +26,11 @@ func (b *BirdClient) ShowStatus() (resp, replyCode []byte, err error) {
 
 // ShowMemory returns the memory usage of the bird daemon
 func (b *BirdClient) ShowMemory() (resp, replyCode []byte, err error) {
+	// ensure to be connected to the bird daemon
 	err = b.s.Connect()
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(SHOW_MEMORY)
 	if err != nil {
@@ -57,7 +56,6 @@ func (b *BirdClient) ShowProtocols(args ...string) (resp, replyCode []byte, err 
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_PROTOCOLS}, args...), " "))
 	if err != nil {
@@ -84,7 +82,6 @@ func (b *BirdClient) ShowInterfaces(args ...string) (resp, replyCode []byte, err
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_INTERFACES}, args...), " "))
 	if err != nil {
@@ -111,7 +108,6 @@ func (b *BirdClient) ShowRoute(args ...string) (resp, replyCode []byte, err erro
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_ROUTE}, args...), " "))
 	if err != nil {
@@ -138,7 +134,6 @@ func (b *BirdClient) ShowSymbols(args ...string) (resp, replyCode []byte, err er
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_SYMBOLS}, args...), " "))
 	if err != nil {
@@ -165,7 +160,6 @@ func (b *BirdClient) ShowBFDSessions(args ...string) (resp, replyCode []byte, er
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_BFD_SESSIONS}, args...), " "))
 	if err != nil {
@@ -192,7 +186,6 @@ func (b *BirdClient) ShowBabelInterfaces(args ...string) (resp, replyCode []byte
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_BABEL_INTERFACES}, args...), " "))
 	if err != nil {
@@ -219,7 +212,6 @@ func (b *BirdClient) ShowBabelNeighbors(args ...string) (resp, replyCode []byte,
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_BABEL_NEIGHBORS}, args...), " "))
 	if err != nil {
@@ -246,7 +238,6 @@ func (b *BirdClient) ShowBabelEntries(args ...string) (resp, replyCode []byte, e
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_BABEL_ENTRIES}, args...), " "))
 	if err != nil {
@@ -273,7 +264,6 @@ func (b *BirdClient) ShowBabelRoutes(args ...string) (resp, replyCode []byte, er
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_BABEL_ROUTES}, args...), " "))
 	if err != nil {
@@ -300,7 +290,6 @@ func (b *BirdClient) ShowOSPF(args ...string) (resp, replyCode []byte, err error
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_OSPF}, args...), " "))
 	if err != nil {
@@ -327,7 +316,6 @@ func (b *BirdClient) ShowRIPInterfaces(args ...string) (resp, replyCode []byte, 
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_RIP_INTERFACES}, args...), " "))
 	if err != nil {
@@ -354,7 +342,6 @@ func (b *BirdClient) ShowRIPNeighbors(args ...string) (resp, replyCode []byte, e
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_RIP_NEIGHBORS}, args...), " "))
 	if err != nil {
@@ -381,7 +368,6 @@ func (b *BirdClient) ShowStatic(args ...string) (resp, replyCode []byte, err err
 	if err != nil {
 		return
 	}
-	defer b.s.Close()
 
 	resp, replyCode, err = b.s.Send(strings.Join(append([]string{SHOW_STATIC}, args...), " "))
 	if err != nil {

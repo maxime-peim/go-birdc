@@ -43,3 +43,11 @@ func New(opts *BirdClientOptions) *BirdClient {
 		s: socket.NewBirdSocket(opts.Path, opts.SocketBufferSize),
 	}
 }
+
+func (c *BirdClient) Connect() error {
+	return c.s.Connect()
+}
+
+func (c *BirdClient) Close() {
+	c.s.Close()
+}
